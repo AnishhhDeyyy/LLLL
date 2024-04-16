@@ -1,0 +1,48 @@
+class Solution {
+    public int[][] divideArray(int[] nums, int k) {
+        int[][] res = new int[nums.length/3][3];
+        int in = 0;
+        Arrays.sort(nums);
+        boolean b = false;
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            list.add(nums[i]);
+            if(list.size()==3){
+                 b = check(list,k);
+                if(b == true){
+                    fill(res,in,list);
+                    in++;
+                    list.clear();
+                }else {
+                    break;
+                }
+            }
+        }
+        
+        if(b == false){
+            int[][] p = new int[0][0];
+            return p;
+        }else{
+            return res;
+        }
+    }
+    public static void fill(int[][] res,int in,ArrayList<Integer> list){
+        for(int i=0;i<list.size();i++){
+            res[in][i] = list.get(i);
+        }
+    }
+    public static boolean check(ArrayList<Integer> list,int k ){
+        if(list.size()!=3){
+            return false;
+        }
+        for(int i=0;i<list.size();i++){
+            for (int j=0;j<list.size();j++){
+                int t = list.get(i) - list.get(j);
+                if(t>k){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
