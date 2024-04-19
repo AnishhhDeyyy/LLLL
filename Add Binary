@@ -1,0 +1,23 @@
+class Solution {
+    public String addBinary(String a, String b) {
+       int x = 0;
+        int y = 0;
+        int carry = 0;
+        String s = new String();
+        int p = 0;
+        while (p<a.length() || p<b.length() || carry!=0){
+            x = 0;
+            if(p<a.length() && a.charAt(a.length()-p-1) == '1'){
+                x = 1;
+            }
+            y = 0;
+            if(p<b.length() && b.charAt(b.length()-p-1) == '1') {
+                y = 1;
+            }
+            s = String.valueOf(((x+y+carry)%2)) + s;
+            carry = (x+y+carry)/2;
+            p++;
+        }
+        return s;
+    }
+}
